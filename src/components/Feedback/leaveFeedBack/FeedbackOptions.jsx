@@ -1,11 +1,11 @@
 import styles from "./feedbackOptons.module.css"
+import PropTypes from 'prop-types'
 
 
 const FeedbackOptions  = ({onLeaveFeedback,options})=>{
   const elements = Object.keys(options).map(option => <li key={option}><button style={{ backgroundColor:getColor()}} className={styles.button}  onClick={()=>onLeaveFeedback(option)}>{option}</button></li>)
   return (
     <div>
-    <h1 className={styles.heading}>Оставьте ваш отзыв</h1>
     <ul className={styles.buttonsList}>
     {elements}</ul>
     </div>
@@ -23,3 +23,16 @@ function getColor() {
   }
   return color;
       }
+
+
+      FeedbackOptions.defaultProps ={
+        options:[]
+      }
+  FeedbackOptions.propTypes ={
+    onLeaveFeedback: PropTypes.func.isRequired,
+    options:PropTypes.shape({
+      Good:PropTypes.number.isRequired,
+      Neutral:PropTypes.number.isRequired,
+      Bad:PropTypes.number.isRequired,
+    }).isRequired,
+}
